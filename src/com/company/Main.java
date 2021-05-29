@@ -74,7 +74,7 @@ public class Main {
 
         Car fiat = new Car();
         fiat.engineSize = 1.9;
-        fiat.fuelType = "disel";
+        fiat.fuelType = "Diesel";
         fiat.producer = "Fiat";
         fiat.model = "Bravo";
 

@@ -3,6 +3,7 @@ package com.company;
 import com.company.animals.*;
 import com.company.devices.*;
 
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
@@ -57,6 +58,14 @@ public class Main {
             System.out.println(fingerName);
         }
 
+        List<String> sortedFingerNames = Arrays.stream(me.fingerNames).sorted().toList();
+
+        for (String fingerName: sortedFingerNames) {
+            System.out.println(fingerName);
+        }
+
+
+
 
         Phone onePlus = new Phone("onePlus",
                 "8Pro",
@@ -75,13 +84,14 @@ public class Main {
         Car fiat = new Car();
         fiat.engineSize = 1.9;
         fiat.fuelType = "Diesel";
-        fiat.producer = "Fiat";
-        fiat.model = "Bravo";
+        fiat.setProducer("Fiat");
+        fiat.setModel("Bravo");
 
+        System.out.println(iPhone6.getModel());
+        System.out.println(iPhone6.getProducer());
         System.out.println(iPhone6.os);
         System.out.println(iPhone6.screenSize);
-        System.out.println(iPhone6.model);
-        System.out.println(iPhone6.producer);
+
 
         fiat.turnOn();
         iPhone6.turnOn();

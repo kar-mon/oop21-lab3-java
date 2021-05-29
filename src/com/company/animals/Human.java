@@ -12,7 +12,16 @@ public class Human extends Animal {
     public String lastName;
     List<Animal> pets;
     public Phone phone;
-    public Car car;
+    Car car;
+
+    public Car getCar() {
+        return car;
+    }
+
+    public void setCar(Car car) {
+        this.car = car;
+    }
+
     public Double cash;
     public String[] fingerNames;
 

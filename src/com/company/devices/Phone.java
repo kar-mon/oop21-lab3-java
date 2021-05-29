@@ -24,7 +24,7 @@ public class Phone extends Device {
     }
 
     @Override
-    public boolean sell(Human seller, Human buyer, Double price) {
+    public void sell(Human seller, Human buyer, Double price) throws Exception {
         if(seller.phone == this) {
             if (buyer.cash >= price) {
                 buyer.cash -= price;
@@ -32,13 +32,11 @@ public class Phone extends Device {
                 buyer.phone = this;
                 seller.phone = null;
                 System.out.println("Phone has been sold");
-                return true;
             } else {
-                System.out.println("Buyer does not have enough money");
+               throw new Exception("Buyer does not have enough money");
             }
         } else {
-            System.out.println("Seller does not own the car");
+            throw new Exception("Seller does not own the car");
         }
-        return false;
     }
 }

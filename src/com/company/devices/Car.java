@@ -15,22 +15,20 @@ public class Car extends Device {
     }
 
     @Override
-    public boolean sell(Human seller, Human buyer, Double price) {
-        if(seller.car == this) {
+    public void sell(Human seller, Human buyer, Double price) throws Exception {
+        if(seller.getCar() == this) {
             if (buyer.cash >= price) {
                 buyer.cash -= price;
                 seller.cash += price;
-                buyer.car = this;
-                seller.car = null;
+                buyer.setCar(this);
+                seller.setCar(null);
                 System.out.println("Car has been sold");
-                return true;
             } else {
-                System.out.println("Buyer does not have enough money");
+                throw new Exception("Buyer does not have enough money");
             }
         } else {
-            System.out.println("Seller does not own the car");
+            throw new Exception("Seller does not own the car");
         }
-        return false;
     }
 
     public void refuel() {

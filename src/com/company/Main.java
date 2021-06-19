@@ -31,10 +31,10 @@ public class Main {
         someone.firstName = "Andrzej";
         someone.lastName = "Karczoch";
 
-        Human humanA = new Human(1500.0,2);
-        Human humanB = new Human(2500.1,2);
-        Human humanC = new Human(3500.5,2);
-        Human humanD = new Human(4500.0,2);
+        Human humanA = new Human(1500.0,2); humanA.firstName ="A"; humanA.lastName = "A";
+        Human humanB = new Human(2500.1,2); humanB.firstName ="B"; humanB.lastName = "B";
+        Human humanC = new Human(3500.5,2); humanC.firstName ="C"; humanC.lastName = "C";
+        Human humanD = new Human(4500.0,2); humanD.firstName ="D"; humanD.lastName = "D";
 
 
         Animal dog = new Animal("dog");
@@ -236,6 +236,8 @@ public class Main {
         System.out.println("The car was sold " + volga.howManyTimesSold() +" times");
 
         System.out.println(volga.ifHumanSoldToHuman(humanC,humanB));
+
+        System.out.println("Volga's history is: " + volga.transactionsList);
 
     }
 }

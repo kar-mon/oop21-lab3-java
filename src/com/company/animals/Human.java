@@ -6,6 +6,7 @@ import com.company.devices.Phone;
 import java.sql.Array;
 import java.util.*;
 import java.util.stream.Stream;
+import java.util.Date;
 
 public class Human extends Animal {
     public String firstName;
@@ -22,10 +23,11 @@ public class Human extends Animal {
     }
 
     public void setCar(Car vehicle, int parkingSpotNo) {
+        if(vehicle.transactionsList.isEmpty() ){
+            vehicle.registerTransaction(null,this,0.0,new Date());
+        }
         garage[parkingSpotNo] = vehicle;
-    if (vehicle != null){
-        vehicle.registerOwner(this);
-    }    }
+    }
 
     public void setCar(Car vehicle) {
         for (int i =0; i<garage.length; i++){
@@ -34,7 +36,7 @@ public class Human extends Animal {
 
     public void removeCar(Car vehicle){
         for (int i = 0; i<garage.length; i++){
-            if (garage[i] == vehicle) setCar(null, i);
+            if (garage[i] == vehicle) {garage[i] = null;}
         }
     }
 
@@ -91,7 +93,6 @@ public class Human extends Animal {
         this(salary, 0);
     }
 
-
     public Double getSalary() {
         return this.salary;
     }
@@ -116,4 +117,11 @@ public class Human extends Animal {
         return pets;
     }
 
+    @Override
+    public String toString() {
+        return "Human{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                '}';
+    }
 }

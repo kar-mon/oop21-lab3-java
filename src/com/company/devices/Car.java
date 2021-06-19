@@ -6,6 +6,7 @@ import com.company.animals.Human;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
+import java.util.Date;
 
 public class Car extends Device {
 
@@ -13,34 +14,31 @@ public class Car extends Device {
     public String fuelType;
     final static Double MAX_FUEL = 1.0;
     public Double currentFuel = 0.0;
-    List<Human> owners = new Vector<Human>();
 
-    public void registerOwner(Human owner){
-        owners.add(owner);
+    public List<Transaction> transactionsList = new Vector<Transaction>();
+
+    public void registerTransaction(Human seller, Human buyer,double price, Date transactionDate){
+        transactionsList.add(new Transaction(seller,buyer,price,transactionDate));
     }
 
     public boolean wasOwner(Human allegedOwner){
-        for (var owner:owners) {
-            if (allegedOwner == owner){
+        for (var transaction:transactionsList) {
+            if (allegedOwner == transaction.deviceBuyer){
                 return true;
             }
         } return false;
     }
 
-    private int getOwnerIndex(Human perhapsOwner){
-            int index=owners.indexOf(perhapsOwner);
-        return index;
-    }
-
-    public boolean ifHumanSoldToHuman(Human allegedSeller, Human allegedBuyer){
-        if (getOwnerIndex(allegedSeller)==getOwnerIndex(allegedBuyer)-1){
+     public boolean ifHumanSoldToHuman(Human allegedSeller, Human allegedBuyer){
+         for (var transaction:transactionsList) {
+        if (transaction.deviceSeller == allegedSeller && transaction.deviceBuyer == allegedBuyer) {
             return true;
-        }
+        }}
         return false;
     }
 
-    public int howManyTimesSold(){ //ile razy szpak był dziobany
-        return owners.size()-1; //calculating how many times the car was sold after 1st owner, not taking into account that the 1st owner had to get the car somehow
+    public int howManyTimesSold(){
+        return transactionsList.size()-1; //calculating how many times the car was sold after 1st owner, not taking into account that the 1st owner had to get the car somehow
     }
 
     @Override
@@ -52,8 +50,6 @@ public class Car extends Device {
                 '}';
     }
 
-    //ArrayList<String> owners = new ArrayList<String>();
-
     @Override
     public void turnOn() {
         System.out.println("Car is turned on");
@@ -61,9 +57,8 @@ public class Car extends Device {
 
     @Override
     public void sell(Human seller, Human buyer, Double price) throws Exception {
-
-        //if(seller.isCarOwned(this))
-        if (seller == owners.get(owners.size() - 1))
+        var lastTransaction = transactionsList.get(transactionsList.size() - 1);
+        if (seller == lastTransaction.deviceBuyer)
         {
             if (buyer.cash >= price) {
                 if(buyer.isSpot()){
@@ -71,6 +66,7 @@ public class Car extends Device {
                 seller.cash += price;
                 buyer.setCar(this);
                 seller.removeCar(this);
+                registerTransaction(seller, buyer, price,new Date());
                 System.out.println("Car has been sold");
             }
             else {

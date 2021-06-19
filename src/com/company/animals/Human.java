@@ -22,7 +22,10 @@ public class Human extends Animal {
     }
 
     public void setCar(Car vehicle, int parkingSpotNo) {
-        garage[parkingSpotNo] = vehicle;     }
+        garage[parkingSpotNo] = vehicle;
+    if (vehicle != null){
+        vehicle.registerOwner(this);
+    }    }
 
     public void setCar(Car vehicle) {
         for (int i =0; i<garage.length; i++){
@@ -112,7 +115,5 @@ public class Human extends Animal {
     public List<Animal> getPets() {
         return pets;
     }
-
-    // public int bDoPotegiA (int a, int b){ return  (int) Math.pow(b,a);}
 
 }

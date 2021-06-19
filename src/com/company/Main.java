@@ -31,6 +31,12 @@ public class Main {
         someone.firstName = "Andrzej";
         someone.lastName = "Karczoch";
 
+        Human humanA = new Human(1500.0,2);
+        Human humanB = new Human(2500.1,2);
+        Human humanC = new Human(3500.5,2);
+        Human humanD = new Human(4500.0,2);
+
+
         Animal dog = new Animal("dog");
         dog.name = "Szarik";
         Animal cat = new Animal("cat");
@@ -203,12 +209,33 @@ public class Main {
         System.out.println(iPhone6.os);
         System.out.println(iPhone6.screenSize);
 
-
-        //System.out.println(me.bDoPotegiA(2,3));
-
-
         fiat.turnOn();
         iPhone6.turnOn();
+
+        Car volga = new Car();
+        volga.engineSize = 2.5;
+        volga.fuelType = "petrol";
+        volga.setProducer("GAZ");
+        volga.setModel("M-21 Volga");
+        volga.setYearOfProduction(1956);
+        volga.setValue(1000.0);
+
+        humanA.setCar(volga,0);
+        try{ volga.sell(humanA,humanB,1000.0);}
+        catch(Exception e){System.out.println(e.getMessage());}
+
+        try{ volga.sell(humanB,humanC,900.0);}
+        catch(Exception e){System.out.println(e.getMessage());}
+
+        try{ volga.sell(humanC,humanA,800.0);}
+        catch(Exception e){System.out.println(e.getMessage());}
+
+        try{ volga.sell(humanA,humanD,700.0);}
+        catch(Exception e){System.out.println(e.getMessage());}
+
+        System.out.println("The car was sold " + volga.howManyTimesSold() +" times");
+
+        System.out.println(volga.ifHumanSoldToHuman(humanC,humanB));
 
     }
 }

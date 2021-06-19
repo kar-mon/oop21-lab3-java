@@ -4,7 +4,7 @@ public abstract class Device implements Sellable {
     String producer;
     String model;
     Integer yearOfProduction;
-    Double value;
+    Double value = 0.0;
 
     public String getProducer() {
         return producer;
@@ -39,4 +39,5 @@ public abstract class Device implements Sellable {
     }
 
     public abstract void turnOn();
-}
+
+    }

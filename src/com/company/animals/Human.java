@@ -4,25 +4,71 @@ import com.company.devices.Car;
 import com.company.devices.Phone;
 
 import java.sql.Array;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Stream;
 
 public class Human extends Animal {
     public String firstName;
     public String lastName;
     List<Animal> pets;
     public Phone phone;
-    Car car;
+    private Car[] garage;
+    public Double cash = 0.0;
 
-    public Car getCar() {
-        return car;
+
+
+    public Car getCar(int parkingSpotNo) {
+        return garage[parkingSpotNo];
     }
 
-    public void setCar(Car car) {
-        this.car = car;
+    public void setCar(Car vehicle, int parkingSpotNo) {
+        garage[parkingSpotNo] = vehicle;     }
+
+    public void setCar(Car vehicle) {
+        for (int i =0; i<garage.length; i++){
+      if (garage[i] == null) {setCar(vehicle, i); break;} ;
+    }}
+
+    public void removeCar(Car vehicle){
+        for (int i = 0; i<garage.length; i++){
+            if (garage[i] == vehicle) setCar(null, i);
+        }
     }
 
-    public Double cash;
+    public boolean isCarOwned (Car auto){
+        for (var a:garage
+             ) {
+            if (a == auto) return true;
+               }
+        return false;
+    }
+
+    public boolean isSpot(){
+        for (var n : garage) {
+            if (n == null) return true;
+        }
+        return false;
+    }
+
+    public double garageCarsValue(){
+        double carsValue = 0.0;
+        for (Car vehicle: garage) {
+            if (vehicle != null) {
+            carsValue += vehicle.getValue(); }}
+        return carsValue;
+    };
+
+    public List<Car> CarsSortedByYear() {
+        List<Car> SortedCarsList = new Vector<Car>();
+        for (var c :garage) {
+            if (c != null){
+          SortedCarsList.add(c);
+            }
+        };
+        SortedCarsList.sort((Car c1, Car c2)-> c1.getYearOfProduction()- c2.getYearOfProduction());
+        return SortedCarsList;
+    };
+
     public String[] fingerNames;
 
     public final int FINGER_COUNT = 10;
@@ -30,11 +76,18 @@ public class Human extends Animal {
 
     private Double salary;
 
-    public Human(Double salary) {
+    public Human(Double salary,int garageSize) {
         super(HUMAN_SPECIE);
         this.setSalary(salary);
         fingerNames = new String[FINGER_COUNT];
+        garage = new Car[garageSize];
+        this.cash = salary;
     }
+
+    public Human(Double salary){
+        this(salary, 0);
+    }
+
 
     public Double getSalary() {
         return this.salary;
@@ -59,5 +112,7 @@ public class Human extends Animal {
     public List<Animal> getPets() {
         return pets;
     }
+
+    // public int bDoPotegiA (int a, int b){ return  (int) Math.pow(b,a);}
 
 }

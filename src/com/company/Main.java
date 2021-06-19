@@ -11,14 +11,34 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Human me = new Human(1000.0);
+        Human me = new Human(1000.0,5);
         me.firstName = "Jan";
         me.lastName = "Kowalski";
+
+        Human buyer = new Human(2000.0, 3);
+        buyer.firstName = "Grzegorz";
+        buyer.lastName = "Brzeczyszczykiewicz";
+
+        Human seller = new Human(7500.0,3);
+        seller.firstName = "Froddo";
+        seller.lastName = "Baggins";
+
+        Human somebody = new Human(3500.5,2);
+        somebody.firstName = "Grazyna";
+        somebody.lastName = "Karczoch";
+
+        Human someone = new Human(8500.77,1);
+        someone.firstName = "Andrzej";
+        someone.lastName = "Karczoch";
 
         Animal dog = new Animal("dog");
         dog.name = "Szarik";
         Animal cat = new Animal("cat");
         cat.name = "Puszek";
+        Animal dog2 = new Animal("dog");
+        dog2.name = "Fafik";
+        Animal cat2 = new Animal("cat");
+        cat2.name = "Cat";
 
         me.addPet(dog);
         me.addPet(cat);
@@ -26,6 +46,9 @@ public class Main {
         for (Animal pet: pets) {
             System.out.println(pet.name);
         }
+
+        buyer.addPet(dog2);
+        seller.addPet(cat2);
 
         for(int i=0;i<pets.size();i++) {
             System.out.println(String.format("Pet number %d is named %s and weights %.2f", i, pets.get(i).name, pets.get(i).getWeight()));
@@ -65,8 +88,6 @@ public class Main {
         }
 
 
-
-
         Phone onePlus = new Phone("onePlus",
                 "8Pro",
                 2.3,
@@ -78,6 +99,8 @@ public class Main {
         System.out.println("phone: " + iPhone6);
         System.out.println("human: " + me);
 
+        Phone nokia = new Phone ("nokia","3310", 1.5,null);
+
 
         onePlus.turnOn();
 
@@ -86,6 +109,94 @@ public class Main {
         fiat.fuelType = "Diesel";
         fiat.setProducer("Fiat");
         fiat.setModel("Bravo");
+        fiat.setYearOfProduction(1995);
+        fiat.setValue(50.0);
+
+        Car volvo = new Car();
+        volvo.engineSize = 3.5;
+        volvo.fuelType = "Diesel";
+        volvo.setProducer("Volvo");
+        volvo.setModel("XC70");
+        volvo.setYearOfProduction(2010);
+        volvo.setValue(35000.0);
+
+        Car fiat2 = new Car();
+        fiat2.engineSize = 1.0;
+        fiat2.fuelType = "LPG";
+        fiat2.setProducer("fiat");
+        fiat2.setModel("punto");
+        fiat2.setYearOfProduction(2000);
+        fiat2.setValue(500.0);
+
+        Car mercedes = new Car();
+        mercedes.engineSize = 2.0;
+        mercedes.fuelType = "Diesel";
+        mercedes.setProducer("mercedes");
+        mercedes.setModel("G class");
+        mercedes.setYearOfProduction(1987);
+        mercedes.setValue(50000.0);
+
+        Car golf = new Car();
+        golf.engineSize = 1.5;
+        golf.fuelType = "Diesel";
+        golf.setProducer("Volkswagen");
+        golf.setModel("Golf");
+        golf.setYearOfProduction(2021);
+        golf.setValue(35000.0);
+
+        Car opel = new Car();
+        opel.engineSize = 1.9;
+        opel.fuelType = "Petrol";
+        opel.setProducer("opel");
+        opel.setModel("corsa");
+        opel.setYearOfProduction(2019);
+        opel.setValue(15000.0);
+
+
+        me.setCar(fiat, 0);
+        me.setCar(volvo, 1);
+
+        seller.setCar(fiat2,0);
+        seller.setCar(golf,1);
+        somebody.setCar(mercedes,1);
+
+        System.out.println("sprzedam opla");
+
+        buyer.setCar(opel,0);
+
+        try{ fiat2.sell(seller,buyer,500.0);}
+        catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+
+        try{ mercedes.sell(somebody,someone,30000.0);}
+        catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+
+        try{ fiat.sell(me,buyer,50.0);}
+        catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+
+        System.out.println(me.garageCarsValue());
+        System.out.println(me.CarsSortedByYear());
+
+        System.out.println(seller.garageCarsValue());
+        System.out.println(seller.CarsSortedByYear());
+
+        System.out.println(buyer.garageCarsValue());
+        System.out.println(buyer.CarsSortedByYear());
+
+        System.out.println(somebody.garageCarsValue());
+        System.out.println(somebody.CarsSortedByYear());
+
+        System.out.println(someone.garageCarsValue());
+        System.out.println(someone.CarsSortedByYear());
+
 
         System.out.println(iPhone6.getModel());
         System.out.println(iPhone6.getProducer());
@@ -93,7 +204,11 @@ public class Main {
         System.out.println(iPhone6.screenSize);
 
 
+        //System.out.println(me.bDoPotegiA(2,3));
+
+
         fiat.turnOn();
         iPhone6.turnOn();
+
     }
 }
